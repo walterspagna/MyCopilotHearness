@@ -1,0 +1,3 @@
+Sandbox/*.tmp
+*.code-workspace
+.github/hooks/*.log

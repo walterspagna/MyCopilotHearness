@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "hooks": {
+    "preToolUse": [
+      {
+        "type": "command",
+        "command": "node .github/hooks/my-log-tool-use.cjs",
+        "timeoutSec": 10
+      }
+    ]
+  }
+}

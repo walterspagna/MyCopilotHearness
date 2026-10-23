@@ -1,0 +1,3 @@
+- Rispondi in italiano, in modo breve.
+- Codice e commenti nuovi in inglese.
+- Se qualcosa è ambiguo, chiedi prima di procedere.
