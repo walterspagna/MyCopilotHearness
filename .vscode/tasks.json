@@ -1,0 +1,48 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "my: build API",
+			"type": "process",
+			"command": "dotnet",
+			"args": [
+				"build",
+				"${workspaceFolder:NETAOS-NETAASSISTANT-BACKEND}/API/NETAASSISTANT.API.csproj",
+				"/property:GenerateFullPaths=true",
+				"/consoleloggerparameters:NoSummary"
+			],
+			"problemMatcher": "$msCompile"
+		},
+		{
+			"label": "my: wait MCP Analytics (8000)",
+			"type": "process",
+			"command": "powershell",
+			"args": [
+				"-NoProfile",
+				"-Command",
+				"$end=(Get-Date).AddSeconds(90); while((Get-Date) -lt $end){ if(Get-NetTCPConnection -LocalPort 8000 -State Listen -ErrorAction SilentlyContinue){ Write-Host 'MCP Analytics in ascolto su 8000'; exit 0 }; Start-Sleep -Seconds 1 }; Write-Error 'MCP Analytics non in ascolto su 8000 dopo 90s'; exit 1"
+			],
+			"problemMatcher": []
+		},
+		{
+			"label": "my: prepare API (build + wait MCP 8000)",
+			"dependsOn": [
+				"my: build API",
+				"my: wait MCP Analytics (8000)"
+			],
+			"dependsOrder": "parallel",
+			"problemMatcher": []
+		},
+		{
+			"label": "my: stop ports (7278, 7860, 8000)",
+			"type": "process",
+			"command": "powershell",
+			"args": [
+				"-NoProfile",
+				"-Command",
+				"Get-NetTCPConnection -LocalPort 7278,7860,8000 -State Listen -ErrorAction SilentlyContinue | ForEach-Object { Stop-Process -Id $_.OwningProcess -Force }"
+			],
+			"problemMatcher": []
+		}
+	]
+}

@@ -1,0 +1,49 @@
+{
+	"version": "0.2.0",
+	"configurations": [
+		{
+			"name": "my: MCP Analytics (Python, 8000)",
+			"type": "debugpy",
+			"request": "launch",
+			"program": "${workspaceFolder:NETAOS-NETAASSISTANT-BACKEND}/MCP_NetaAnalytics/server.py",
+			"cwd": "${workspaceFolder:NETAOS-NETAASSISTANT-BACKEND}/MCP_NetaAnalytics",
+			"python": "${workspaceFolder:NETAOS-NETAASSISTANT-BACKEND}/MCP_NetaAnalytics/.venv/Scripts/python.exe",
+			"env": {
+				"ROOT_PATH_DATAFRAME": "C:\\Lavoro\\MCP\\RMosca\\RMOSCA-primaparte"
+			},
+			"console": "integratedTerminal"
+		},
+		{
+			"name": "my: NETAASSISTANT.API (7278)",
+			"type": "coreclr",
+			"request": "launch",
+			"preLaunchTask": "my: prepare API (build + wait MCP 8000)",
+			"program": "${workspaceFolder:NETAOS-NETAASSISTANT-BACKEND}/API/bin/Debug/net8.0/NETAASSISTANT.API.dll",
+			"cwd": "${workspaceFolder:NETAOS-NETAASSISTANT-BACKEND}/API",
+			"env": {
+				"ASPNETCORE_ENVIRONMENT": "Development",
+				"ASPNETCORE_URLS": "http://localhost:7278"
+			}
+		},
+		{
+			"name": "my: Gradio tester (7860)",
+			"type": "debugpy",
+			"request": "launch",
+			"program": "${workspaceFolder:NETAOS-NETAASSISTANT-BACKEND}/Tools/Notebooks/netaassistant_gradio_tester_app.py",
+			"cwd": "${workspaceFolder:NETAOS-NETAASSISTANT-BACKEND}",
+			"python": "${workspaceFolder:NETAOS-NETAASSISTANT-BACKEND}/Tools/Notebooks/.venv/Scripts/python.exe",
+			"console": "integratedTerminal"
+		}
+	],
+	"compounds": [
+		{
+			"name": "my: Debug NETA Assistant (MCP + API + Gradio)",
+			"configurations": [
+				"my: MCP Analytics (Python, 8000)",
+				"my: NETAASSISTANT.API (7278)",
+				"my: Gradio tester (7860)"
+			],
+			"stopAll": true
+		}
+	]
+}

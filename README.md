@@ -18,6 +18,7 @@ Il repo git è separato (nessun push sul repo comune). Non aggiungere questa car
 | `.github/instructions/` | `my-*.instructions.md` | Sì |
 | `.github/prompts/` | `my-*.prompt.md` (solo sessioni Local) | Sì |
 | `.github/hooks/` | `my-*.json` | Sì (Preview) |
+| `.vscode/launch.json`, `tasks.json` | Debug composto personale: MCP Analytics + API + Gradio (F5 su `my: Debug NETA Assistant`) | No (è debug, non Copilot) |
 | `Templates/` | Modelli da copiare | No |
 | `Sandbox/` | Prove usa e getta | No |
 
